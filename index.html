@@ -40,7 +40,7 @@
                 <h5 class="card-title">Ejercicio 1</h5>
                 <p class="card-text">Pago de Permisos</p>
                 <input type="text" class="form-control mb-3" id="input1" placeholder="Ingresar un nombre">
-                <a href="#" class="btn btn-primary" onclick="listadoAsistencia()">Ejecutar</a>
+                <a href="#" class="btn btn-primary" onclick="permiso()">Ejecutar</a>
                 <div id="resultado-container1" class="mt-4 d-none">
                     <h6>Resultado: </h6>
                     <div id="result1" class="alert alert-success fw-bold"></div>
@@ -54,7 +54,8 @@
                 <h5 class="card-title">Ejercicio 2</h5>
                 <p class="card-text">Fila de Vacunación</p>
                 <input type="text" class="form-control mb-3" id="input2" placeholder="Ingresar un nombre">
-                <a href="#" class="btn btn-primary" onclick="ingregarUrgencia()">Ejecutar</a>
+                <a id="Normal" href="#" class="btn btn-primary" onclick="listadoVacuna()">Normal</a>
+                <a id="Urgencia" href="#" class="btn btn-danger" onclick="listadoVacuna()">Urgencia</a>
                 <div id="resultado-container2" class="mt-4 d-none">
                     <h6>Resultado: </h6>
                     <div id="result2" class="alert alert-success fw-bold"></div>
@@ -68,7 +69,7 @@
                 <h5 class="card-title">Ejercicio 3</h5>
                 <p class="card-text">Buscador de Beneficiarios</p>
                 <input type="text" class="form-control mb-3" id="input3" placeholder="Ingresar un nombre">
-                <a href="#" class="btn btn-primary" onclick="">Ejecutar</a>
+                <a href="#" class="btn btn-primary" onclick="verificarNombre()">Ejecutar</a>
                 <div id="resultado-container3" class="mt-4 d-none">
                     <h6>Resultado: </h6>
                     <div id="result3" class="alert alert-success fw-bold"></div>
@@ -76,6 +77,7 @@
             </div>
         </div>
     </main>
+
     <script src="static/js/script.js"></script>
     <!-- Script de boostrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
