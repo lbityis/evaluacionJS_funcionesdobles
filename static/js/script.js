@@ -6,24 +6,25 @@ el descuento es del 15%. Si es menor, es del 5%. Regla: La Función Principal
 debe mostrar el total a pagar con un signo de peso ($).*/
 
 function calcularTotal(monto) {
-    if (monto > 70.000) {
-        monto = monto * 0.15 / 100;
-        return monto;
+    let descuento;
+    if (monto > 70000) {
+        descuento = monto * 0.15 / 100;
     } else {
-        monto = monto * 0.05 / 100;
-        return monto;
-    };
+        descuento = monto * 0.05 / 100;
+    }
+    return monto - descuento;
 }
 
 function permiso() {
     const result = document.getElementById("result1");
+    const container = document.getElementById("resultado-container1");
     let input1 = document.getElementById("input1");
     let monto = parseFloat(input1.value);
     let totalConDescuento = calcularTotal(monto);
-    input.value = "";
+    container.classList.remove("d-none");
     result.textContent = `Monto a pagar: $${totalConDescuento}`;
-};
-
+    input1.value = "";
+}
 
 
 /*2. Módulo de Salud: Fila de Vacunación (Arreglos y Prioridad)
@@ -33,34 +34,46 @@ Lógica: * Botón Normal: Agrega el nombre al final de la lista (push).
 Botón Urgencia: Agrega el nombre al inicio de la lista (unshift).
 Regla: El resultado debe mostrarse como una lista ordenada en el HTML. <ol>*/
 
-let fila = [];
-function agregarUrgencia(normal) {
-    fila.push(nombre);
-    return fila.join(", ");
-}
-
-function agregarUrgencia(urgencia) {
-    fila.unshift(nombre);
-    return fila.join(", ");
-}
-
-function listadoVacuna() {
-    const container = document.getElementById("resultado-container2");
-    const result1 = document.getElementById("result2");
-    const input = document.getElementById("input2");
-
-    if (input.value !== "") {
-        let nombre = input.value;
-        let resultado = agregarUrgencia(normal);
-        result2.textContent = resultado;
-        input.value = "";
-        container.classList.remove("d-none");
-    } else {
-        alert("El nombre no puede estar vacío.");
+let paciente = [];
+function filaUrgencia(nombre) {
+    paciente.unshift(nombre);
+    let contenido = "";
+    for (let i = 0; i < paciente.length; i++) {
+        contenido += (i + 1) + ".- " + paciente[i] + "<br>";
     }
+    return contenido;
+}
+function vacunaUrgencia() {
+    const container = document.getElementById("resultado-container2");
+    const result2 = document.getElementById("result2");
+    const input = document.getElementById("input2");
+    let nombre = input.value;
+    let resultado = filaUrgencia(nombre);
+    result2.innerHTML = resultado;
+    input.value = "";
+    container.classList.remove("d-none");
 }
 
+function filaNormal(nombre) {
+    paciente.push(nombre);
+    let contenido = "";
+    for (let i = 0; i < paciente.length; i++) {
+        contenido += (i + 1) + ".- " + paciente[i] + "<br>";
+    }
+    return contenido;
+}
 
+function vacunaNormal() {
+    const container = document.getElementById("resultado-container2");
+    const result2 = document.getElementById("result2");
+    const input = document.getElementById("input2");
+    let nombre = input.value;
+    let resultado = filaNormal(nombre);
+
+    result2.innerHTML = resultado;
+    input.value = "";
+    container.classList.remove("d-none");
+}
 
 /*3. Módulo de Subsidios: Buscador de Beneficiarios (Ciclos e If)
 
@@ -71,10 +84,8 @@ Regla: La función debe devolver "Beneficiario Verificado" o "No registrado".*/
 
 let nombresValidos = ["Elisa", "Yulieth", "Isidora", "Isabel", "Alondra", "Krishna"];
 function buscarNombre(nombre) {
-    let mensaje = "Codigo invalido o expirado"
     for (let i = 0; i < nombresValidos.length; i++) {
         if (nombre == nombresValidos[i]) {
-            mensaje = "Beneficiario Verificado"
             return "Beneficiario Verificado"
         } else {
             mensaje = "No registrado"
